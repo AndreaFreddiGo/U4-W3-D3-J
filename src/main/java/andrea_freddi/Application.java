@@ -11,7 +11,7 @@ import jakarta.persistence.Persistence;
 import java.time.LocalDate;
 
 public class Application {
-    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("U4-S3-D2-J");
+    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("U4-W3-W3-J");
 
     public static void main(String[] args) {
 

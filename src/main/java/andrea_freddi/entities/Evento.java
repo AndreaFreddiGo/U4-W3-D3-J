@@ -4,13 +4,15 @@ import andrea_freddi.enums.TipoEvento;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
 @Table(name = "eventi")
 public class Evento {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue
+    @Column(name = "evento_id", nullable = false)
+    private UUID id;
     @Column(name = "titolo", nullable = false)
     private String titolo;
     @Column(name = "data_evento", nullable = false)
@@ -42,7 +44,7 @@ public class Evento {
         return descrizione;
     }
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
