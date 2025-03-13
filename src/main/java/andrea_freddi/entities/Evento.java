@@ -25,15 +25,47 @@ public class Evento {
     @Column(name = "numero_massimo_partecipanti")
     private int numeroMassimoPartecipanti;
 
+    @ManyToOne
+    @JoinColumn(name = "location_id")
+    private Location location;
+
+    @OneToOne(mappedBy = "evento")
+    private Partecipazione partecipazione;
+
     public Evento() {
     }
 
-    public Evento(LocalDate dateEvento, String descrizione, int numeroMassimoPartecipanti, TipoEvento tipoEvento, String titolo) {
+    public Evento(LocalDate dateEvento, String descrizione, int numeroMassimoPartecipanti, TipoEvento tipoEvento, String titolo, Location location) {
         this.dataEvento = dateEvento;
         this.descrizione = descrizione;
         this.numeroMassimoPartecipanti = numeroMassimoPartecipanti;
         this.tipoEvento = tipoEvento;
         this.titolo = titolo;
+        this.location = location;
+    }
+
+    public LocalDate getDataEvento() {
+        return dataEvento;
+    }
+
+    public void setDataEvento(LocalDate dataEvento) {
+        this.dataEvento = dataEvento;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public Partecipazione getPartecipazione() {
+        return partecipazione;
+    }
+
+    public void setPartecipazione(Partecipazione partecipazione) {
+        this.partecipazione = partecipazione;
     }
 
     public LocalDate getDateEvento() {
@@ -44,6 +76,10 @@ public class Evento {
         return descrizione;
     }
 
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
+
     public UUID getId() {
         return id;
     }
@@ -52,23 +88,36 @@ public class Evento {
         return numeroMassimoPartecipanti;
     }
 
+    public void setNumeroMassimoPartecipanti(int numeroMassimoPartecipanti) {
+        this.numeroMassimoPartecipanti = numeroMassimoPartecipanti;
+    }
+
     public TipoEvento getTipoEvento() {
         return tipoEvento;
+    }
+
+    public void setTipoEvento(TipoEvento tipoEvento) {
+        this.tipoEvento = tipoEvento;
     }
 
     public String getTitolo() {
         return titolo;
     }
 
+    public void setTitolo(String titolo) {
+        this.titolo = titolo;
+    }
+
     @Override
     public String toString() {
         return "Evento{" +
-                "dateEvento=" + dataEvento +
+                "dataEvento=" + dataEvento +
                 ", id=" + id +
                 ", titolo='" + titolo + '\'' +
                 ", descrizione='" + descrizione + '\'' +
                 ", tipoEvento=" + tipoEvento +
                 ", numeroMassimoPartecipanti=" + numeroMassimoPartecipanti +
+                ", partecipazione=" + partecipazione +
                 '}';
     }
 }

@@ -2,6 +2,8 @@ package andrea_freddi.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -16,12 +18,15 @@ public class Location {
     @Column(name = "città", nullable = false)
     private String città;
 
+    @OneToMany(mappedBy = "location")
+    private List<Evento> evento = new ArrayList<>();
+
     public Location() {
     }
 
-    public Location(String nome, String città) {
-        this.nome = nome;
+    public Location(String città, String nome) {
         this.città = città;
+        this.nome = nome;
     }
 
     public String getCittà() {
@@ -30,6 +35,10 @@ public class Location {
 
     public void setCittà(String città) {
         this.città = città;
+    }
+
+    public Evento getEvento() {
+        return (Evento) evento;
     }
 
     public UUID getId() {
@@ -50,6 +59,7 @@ public class Location {
                 "città='" + città + '\'' +
                 ", id=" + id +
                 ", nome='" + nome + '\'' +
+                ", evento=" + evento +
                 '}';
     }
 }

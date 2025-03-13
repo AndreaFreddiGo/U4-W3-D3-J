@@ -4,6 +4,8 @@ import andrea_freddi.enums.Sesso;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -23,6 +25,9 @@ public class Persona {
     private LocalDate dataNascita;
     @Column(name = "sesso", nullable = false)
     private Sesso sesso;
+
+    @OneToMany(mappedBy = "persona")
+    private List<Partecipazione> partecipazioni = new ArrayList<>();
 
     public Persona() {
     }

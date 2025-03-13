@@ -12,19 +12,21 @@ public class Partecipazione {
     @GeneratedValue
     @Column(name = "partecipazione_id", nullable = false)
     private UUID id;
-    @Column(name = "evento_id", nullable = false)
-    private UUID idEvento;
-    @Column(name = "persona_id", nullable = false)
-    private UUID idPersona;
     @Column(name = "stato", nullable = false)
     private Stato stato;
+
+    @OneToOne
+    @JoinColumn(name = "evento_id")
+    private Evento evento;
+
+    @ManyToOne
+    @JoinColumn(name = "persona_id")
+    private Persona persona;
 
     public Partecipazione() {
     }
 
-    public Partecipazione(UUID idEvento, UUID idPersona, Stato stato) {
-        this.idEvento = idEvento;
-        this.idPersona = idPersona;
+    public Partecipazione(Stato stato, Evento evento, Persona persona) {
         this.stato = stato;
     }
 
@@ -32,12 +34,12 @@ public class Partecipazione {
         return id;
     }
 
-    public UUID getIdEvento() {
-        return idEvento;
+    public Evento getEvento() {
+        return evento;
     }
 
-    public UUID getIdPersona() {
-        return idPersona;
+    public void setEvento(Evento evento) {
+        this.evento = evento;
     }
 
     public Stato getStato() {
@@ -51,9 +53,7 @@ public class Partecipazione {
     @Override
     public String toString() {
         return "Partecipazione{" +
-                "id=" + id +
-                ", idEvento=" + idEvento +
-                ", idUtente=" + idPersona +
+                ", id=" + id +
                 ", stato=" + stato +
                 '}';
     }
